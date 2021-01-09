@@ -19,11 +19,11 @@ import static org.apache.commons.codec.CharEncoding.UTF_8;
 public class Main {
 
     public static void main(String args[]) {
-        storeReports(args[0],args[1], args[2]);
+        storeReports(args[0], args[1], args[2], args[3],args[4]);
 
     }
 
-    private static void storeReports(String path, String bucket, String project) {
+    private static void storeReports(String path, String project, String bucket, String buildVersion, String appVersion) {
 
 
 
@@ -48,7 +48,7 @@ public class Main {
                         System.out.println(re);
                         String bucketName = bucket;
                     //    BlobId blobid = BlobId.of(bucketName, re);
-                        BlobInfo blobInfo = BlobInfo.newBuilder(bucketName ,"GaugeReports/"+re).build();
+                        BlobInfo blobInfo = BlobInfo.newBuilder(bucketName ,buildVersion+"/"+appVersion+"/"+re).build();
                         storage.create(blobInfo, Files.readAllBytes(Paths.get(re)));
                     }
                     catch(Exception e)
